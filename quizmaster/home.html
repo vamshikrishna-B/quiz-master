@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Master</title>
+  <style>
+    /* General Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+  color: #333;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10%;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #FF6F61;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.search-bar button {
+  padding: 8px 12px;
+  background-color: #FF6F61;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #FF6F61, #FF3B2F);
+  color: white;
+  padding: 100px 10%;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.cta-button {
+  padding: 15px 30px;
+  background-color: white;
+  color: #FF6F61;
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #FF3B2F;
+  color: white;
+}
+
+/* Categories Section */
+.categories {
+  padding: 60px 10%;
+  text-align: center;
+}
+
+.categories h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.category-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-10px);
+}
+
+.category-card i {
+  font-size: 40px;
+  color: #FF6F61;
+  margin-bottom: 15px;
+}
+
+.category-card h3 {
+  font-size: 20px;
+  color: #333;
+}
+
+/* Create Your Own Quiz Section */
+.create-quiz {
+  background-color: #ffffff;
+  padding: 60px 10%;
+  text-align: center;
+}
+
+.create-quiz h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.create-quiz p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.create-quiz-btn {
+  padding: 15px 30px;
+  background-color: #FF6F61;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.create-quiz-btn:hover {
+  background-color: #FF3B2F;
+  transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 40px 10%;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.social-media a {
+  color: white;
+  font-size: 20px;
+  margin: 0 10px;
+}
+
+.copyright {
+  font-size: 14px;
+  color: #ccc;
+}
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">Quiz Master</div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Categories</a></li>
+        <li><a href="#" id="about-us-link">About Us</a></li>
+        <li><a href="#" id="contact-link">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search quizzes...">
+      <button onclick="searchCategories()"><i class="fas fa-search"></i></button>
+    </div>
+    <div id="dynamic-content" class="dynamic-content"></div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Test Your Knowledge, Challenge Your Friends!</h1>
+      <p>Join the ultimate quiz platform and explore thousands of quizzes.</p>
+      <button class="cta-button" onclick="location.href='play.html'" style="cursor: pointer;">Play Now</button>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories">
+    <h2>Explore Categories</h2>
+    <div class="category-grid">
+      <div class="category-card" onclick="location.href='gk.html'" style="cursor: pointer;">
+        <i class="fas fa-globe"></i>
+        <h3>General Knowledge</h3>
+      </div>
+      <div class="category-card" onclick="location.href='science.html'" style="cursor: pointer;">
+        <i class="fas fa-flask"></i>
+        <h3>Science & Nature</h3>
+      </div>
+      <div class="category-card" onclick="location.href='cartoon.html'" style="cursor: pointer;">
+        <i class="fas fa-film"></i>
+        <h3>TV & Cartoon</h3>
+      </div>
+      <div class="category-card" onclick="location.href='history.html'" style="cursor: pointer;">
+        <i class="fas fa-landmark"></i>
+        <h3>History</h3>
+      </div>
+      <div class="category-card" onclick="location.href='sports.html'" style="cursor: pointer;">
+        <i class="fas fa-futbol"></i>
+        <h3>Sports</h3>
+      </div>
+      <div class="category-card" onclick="location.href='music.html'" style="cursor: pointer;">
+        <i class="fas fa-music"></i>
+        <h3>Music</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Create Your Own Quiz Section -->
+  <section class="create-quiz">
+    <h2>Be the Quiz Master!</h2>
+    <p>Share quizzes with friends and the world.</p>
+    <button class="create-quiz-btn" onclick="showShareOptions()">
+      <i class="fas fa-magic"></i> Share with your Friends
+    </button>
+    <div id="share-options" class="share-options" style="display: none;">
+      <a href="https://wa.me/?text=Check%20out%20this%20awesome%20quiz%20platform%20Quiz%20Master!%20%20[Your%20Quiz%20Link%20Here link= https://127.0.0.1:3000/home.html]",href="http://127.0.0.1:3000/home.html" target="_blank">
+        <i class="fab fa-whatsapp"></i> Share on WhatsApp
+      </a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=[Your%20Quiz%20Link%20Here]" target="_blank">
+        <i class="fab fa-facebook"></i> Share on Facebook
+      </a>
+      <a href="https://www.instagram.com" target="_blank">
+        <i class="fab fa-instagram"></i> Share on Instagram
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#">Home</a>
+        <a href="#">Categories</a>
+        <a href="#" id="about-us-link-footer">About Us</a>
+        <a href="#" id="contact-link-footer">Contact</a>
+      </div>
+      <div class="social-media">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="copyright">
+      @ Quiz Master. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- JavaScript for Interactivity -->
+  <script>
+    // Function to display About Us content
+    function showAboutUs() {
+      const dynamicContent = document.getElementById('dynamic-content');
+      dynamicContent.innerHTML = `
+        <p>Welcome to Quiz Master! We are a platform dedicated to providing fun and engaging quizzes for everyone. Test your knowledge, challenge your friends, and explore a wide range of categories.</p>
+      `;
+    }
+
+    // Function to display Contact content
+    function showContact() {
+      const dynamicContent = document.getElementById('dynamic-content');
+      dynamicContent.innerHTML = `
+        <p>Contact us at: <strong>quizmaster@gmail.com</strong></p>
+      `;
+    }
+
+    // Function to search categories
+    function searchCategories() {
+      const searchInput = document.getElementById('search-input').value.toLowerCase();
+      const categories = [
+        { name: 'General Knowledge', link: 'gk.html' },
+        { name: 'Science & Nature', link: 'science.html' },
+        { name: 'TV & Cartoon', link: 'cartoon.html' },
+        { name: 'History', link: 'history.html' },
+        { name: 'Sports', link: 'sports.html' },
+        { name: 'Music', link: 'music.html' }
+      ];
+
+      const filteredCategories = categories.filter(category => 
+        category.name.toLowerCase().includes(searchInput)
+      );
+
+      const dynamicContent = document.getElementById('dynamic-content');
+      if (filteredCategories.length > 0) {
+        dynamicContent.innerHTML = `
+          <h3>Search Results:</h3>
+          <ul>
+            ${filteredCategories.map(category => `
+              <li><a href="${category.link}">${category.name}</a></li>
+            `).join('')}
+          </ul>
+        `;
+      } else {
+        dynamicContent.innerHTML = `<p>No categories found for "${searchInput}".</p>`;
+      }
+    }
+
+    // Event listeners for About Us and Contact links
+    document.getElementById('about-us-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      showAboutUs();
+    });
+
+    document.getElementById('contact-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      showContact();
+    });
+
+    document.getElementById('about-us-link-footer').addEventListener('click', (e) => {
+      e.preventDefault();
+      showAboutUs();
+    });
+
+    document.getElementById('contact-link-footer').addEventListener('click', (e) => {
+      e.preventDefault();
+      showContact();
+    });
+
+    // Function to show share options
+    function showShareOptions() {
+      const shareOptions = document.getElementById('share-options');
+      shareOptions.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
